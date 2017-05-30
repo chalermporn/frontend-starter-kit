@@ -1,0 +1,1823 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Springload Pattern library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/pattern-library.css" />
+</head>
+<body>
+
+    <div class="wrapper t-plain header" role="contentinfo">
+        <div class="gutters" style="padding-top:15px;padding-bottom:15px;">
+            <div class="grid">
+                <div class="width-1/2">
+                    <a href="/">
+                        <svg class="icon icon--leaf" aria-hidden="true" aria-role="presentation" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="64px" height="28px" viewBox="0 0 64 28" xml:space="preserve"><path fill="#7DC265" d="M54.17,2.91c-6.3,0-8.53-1.81-15.07-1.81c-5.77,0-11.21,2.19-12.31,11.64c-0.81,7.06-4.19,9.54-8.1,9.54 c-3.01,0-5.01-1-5.96-3.38c3.86-1.19,6.01-4.44,6.01-8.63c0-5.34-3.44-9.15-9.39-9.15C3.43,1.1,0,4.91,0,10.25 c0,4.34,2.29,7.68,6.35,8.77c1.38,6.3,6.2,8.68,12.3,8.68c7.11,0,12.73-4.34,13.88-12.78c2.86,3.1,6.72,4.05,10.64,4.05 c10.73,0,18.5-8.2,20.84-17.98C60.71,2.29,57.65,2.91,54.17,2.91z M9.35,13.97c-2.19,0-3.39-1.53-3.39-3.62 c0-2.15,1.19-3.67,3.39-3.67c2.24,0,3.43,1.52,3.43,3.67C12.78,12.45,11.59,13.97,9.35,13.97z"/></svg>
+                    </a>
+                </div>
+                <div class="width-1/2">
+                    <p class="u-text-right">Pattern library</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="theme--dark">
+        <div class="wrapper wrapper--narrow">
+            <div class="section gutters">
+                <div class="u-text-center">
+                    <p class="logo" aria-hidden="true">▽</p>
+                    <h1>
+                        Pattern library
+                    </h1>
+                    <p>
+                        Springload’s repository of reusable patterns
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="wrapper wrapper--narrow">
+        <div class="section gutters">
+            <h2>
+                Getting started
+            </h2>
+            <p>This aims to solve classic front-end problems:</p>
+            <ul>
+                <li>Sharing and re-using common patterns between projects</li>
+                <li>Documenting the patterns to maximise their further reuse</li>
+            </ul>
+        </div>
+    </div>-->
+
+
+    <div class="">
+        <div class="wrapper wrapper--narrow">
+            <div class="section gutters">
+                <h2>
+                    Getting started
+                </h2>
+                <p>
+                    To reuse the patterns, head over to our <a href="https://github.com/springload/frontend-starter-kit/">front-end starter kit</a> on GitHub and copy the styles as required.
+                </p>
+                <h3>
+                    Maintaining the patterns
+                </h3>
+                <p>
+                    At the moment, we rely on <a href="https://www.npmjs.com/package/markdown-styleguide-generator">markdown-styleguide-generator</a> to automatically generate the pattern library from comments in the stylesheets.
+                </p>
+                <p>
+                    If you are adding to this codebase please check out our <a href="https://github.com/springload/frontend-starter-kit/blob/master/docs/front-end-principles.md">coding guidelines</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme--fred">
+        <div class="wrapper wrapper--narrow">
+            <div class="section gutters">
+                <blockquote>
+                    <p style="font-size:2.8em">
+                        This is how it is <strong>now</strong>, until we change it
+                    </p>
+                    <cite>- Nick Walsh</cite>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper--narrow">
+        <div class="section gutters">
+            <h2>
+                Organisation
+            </h2>
+            <p>
+                We have seperated our CSS codebase into several sections (called layers), which take form of an inverted triangle: (based on <a href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/">ITCSS architecture</a> ).
+            </p>
+
+            <p>
+                Those layers are as follows:
+            </p>
+            <ol class="styleguide-layers">
+                <li><strong>SETTINGS</strong> – used with preprocessors and contain font, colors definitions, etc.</li>
+                <li><strong>TOOLS</strong> – globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.</li>
+                <li><strong>GENERIC</strong> – reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.</li>
+                <li><strong>ELEMENTS</strong> – styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.</li>
+                <li><strong>OBJECTS</strong> – class-based selectors which define undecorated design patterns, for example media object known from OOCSS</li>
+                <li><strong>COMPONENTS</strong>  – specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components</li>
+                <li><strong>UTILITIES</strong> – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class</li>
+                <li><strong>THEMING</strong> – website themes</li>
+            </ol>
+                <!--<p class="u-text-center"><img src="../styleguide/itcss-triangle.png' alt="Inverted triangle'/></p>-->
+
+            <p>
+                ITCSS stands for Inverted Triangle CSS and it helps you to organize your project CSS files in such way that you can better deal with (not always easy-to-deal with) CSS specifics like global namespace, cascade and selectors specificity.
+            </p>
+            <p>
+                The triangle also shows how styles represented by selectors are ordered in the resulting CSS: from generic styles to explicit ones, from low-specificity selectors to more specific ones (but still not too specific, IDs are not allowed) and from far reaching to localized ones.
+            </p>
+            <p>
+                Secondly, you need to work to a componentised UI architecture. You no longer build to the 'pages' model, but to the modules/components pattern (ITCSS refers to these as 'components'). You build discrete, self-contained pieces of UI as reusable components.
+            </p>
+            <p>
+                Finally, ITCSS requires that you are in favour of a class-based architecture. You are not afraid of adding classes to your HTML; you don't believe that 'less markup' and 'clean markup' are the same thing; and you understand that binding onto classes, rather than bare HTML elements, provides a more robust and scalable architecture.
+            </p>
+        </div>
+    </div>
+
+    <div class="section gutters" style="background-color:#3D4149;">
+        <div class="wrapper styleguide" style="background-color:#7DC265;">
+            <div class="grid">
+                <div class="width-full width-3/4@medium theme--content">
+                    <div class="gutters section">
+                        <div class="styleguide-section" id="Components-Avatar" data-section="Components" data-heading="Avatar">
+
+                            <div class="comment">
+                                <h2>Components/Avatar</h2>
+
+                                <p>Use the &quot;avatar&quot; class to transform your image to a circular image.
+To modify avatar you can add the modifiers listed below:</p>
+                            </div>
+
+                                <div class="result">
+                                    <img class="avatar" src="https://placekitten.com/150/150">
+<img class="avatar avatar--large" src="https://placekitten.com/150/150">
+<img class="avatar avatar--small" src="https://placekitten.com/150/150">
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;img <span class="hljs-keyword">class</span>=<span class="hljs-string">"avatar"</span> src=<span class="hljs-string">"https://placekitten.com/150/150"</span>&gt;
+&lt;img <span class="hljs-keyword">class</span>=<span class="hljs-string">"avatar avatar--large"</span> src=<span class="hljs-string">"https://placekitten.com/150/150"</span>&gt;
+&lt;img <span class="hljs-keyword">class</span>=<span class="hljs-string">"avatar avatar--small"</span> src=<span class="hljs-string">"https://placekitten.com/150/150"</span>&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Basic_form_fields" data-section="Components" data-heading="Basic form fields">
+
+                            <div class="comment">
+                                <h2>Components/Basic form fields</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <div class="form__field">
+    <label>
+        <span class="form__label">
+            How old are you?
+        </span>
+        <input class="form__input" type="text">
+    </label>
+</div>
+
+<div class="form__field">
+    <label>
+        <span class="form__label">
+            Select an option
+        </span>
+        <div class="form__select-container">
+            <select class="form__select">
+                <option value="">Select option...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </div>
+    </label>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form__field"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form__label"</span>&gt;</span>
+            How old are you?
+        <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form__input"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form__field"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form__label"</span>&gt;</span>
+            Select an option
+        <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form__select-container"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form__select"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">""</span>&gt;</span>Select option...<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"1"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"2"</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Button_groups" data-section="Components" data-heading="Button groups">
+
+                            <div class="comment">
+                                <h2>Components/Button groups</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <h5>btn-group</h5>
+<div class="btn-group">
+    <a href="#" class="btn">btn 1</a>
+    <a href="#" class="btn">btn 2</a>
+</div>
+<br>
+<h5>btn-group--block</h5>
+<div class="btn-group btn-group--block">
+    <a href="#" class="btn">btn 1</a>
+    <a href="#" class="btn">btn 2</a>
+</div>
+<br>
+<h5>btn-group--justified</h5>
+<div class="btn-group btn-group--justified">
+    <a href="#" class="btn">btn 1</a>
+    <a href="#" class="btn">btn 2</a>
+</div>
+<br>
+<h5>btn-group--reverse@small</h5>
+<div class="btn-group btn-group--reverse@small">
+    <a href="#" class="btn">btn 1</a>
+    <a href="#" class="btn">btn 2</a>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>btn-group<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn-group"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>btn 1<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>btn 2<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>btn-group--block<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn-group btn-group--block"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>btn 1<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>btn 2<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>btn-group--justified<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn-group btn-group--justified"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>btn 1<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>btn 2<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>btn-group--reverse@small<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn-group btn-group--reverse@small"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>btn 1<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>btn 2<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Buttons" data-section="Components" data-heading="Buttons">
+
+                            <div class="comment">
+                                <h2>Components/Buttons</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <p><a href="#" class="btn">Button</a></p>
+<p><a href="#" class="btn btn--small">Button</a></p>
+<p><a href="#" class="btn btn--wide">Button</a></p>
+<p><a href="#" class="btn btn--block">Button</a></p>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn"</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn--small"</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn--wide"</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn--block"</span>&gt;</span>Button<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Modal_lightboxes" data-section="Components" data-heading="Modal lightboxes">
+
+                            <div class="comment">
+                                <h2>Components/Modal lightboxes</h2>
+
+                                <p>Requires &apos;_generic.keyframes.scss&apos;;</p>
+                            </div>
+
+
+                            <!--the html code-->
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Page_gutters" data-section="Components" data-heading="Page gutters">
+
+                            <div class="comment">
+                                <h2>Components/Page gutters</h2>
+
+                                <p>Page gutters determine the horizontal spacing of the site.</p>
+                            </div>
+
+                                <div class="result">
+                                    <div class="gutters" style="background-color:#0F984F">
+    <p class="u-text-center" style="background-color:#f8f8f8">
+        You can see the gutters highlighted by the green background
+    </p>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"gutters"</span> style=<span class="hljs-string">"background-color:#0F984F"</span>&gt;
+    &lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-text-center"</span> style=<span class="hljs-string">"background-color:#f8f8f8"</span>&gt;
+        You can see <span class="hljs-keyword">the</span> gutters highlighted <span class="hljs-keyword">by</span> <span class="hljs-keyword">the</span> green background
+    &lt;/p&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Page_header" data-section="Components" data-heading="Page header">
+
+                            <div class="comment">
+                                <h2>Components/Page header</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <div class="page-header">
+    Page header
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"page-header"</span>&gt;
+    Page <span class="hljs-tag">header</span>
+&lt;/div&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Page_sections" data-section="Components" data-heading="Page sections">
+
+                            <div class="comment">
+                                <h2>Components/Page sections</h2>
+
+                                <p>Determines the vertical spacing of the site.</p>
+                            </div>
+
+                                <div class="result">
+                                    <div style="background-color:#0F984F">
+    <div class="section">
+        <p class="u-text-center" style="background-color:green">Section</p>
+    </div>
+</div>
+<h5>1. section--no-top</h5>
+<p>Removes the top padding.</p>
+<div style="background-color:#0F984F">
+    <div class="section section--no-top">
+        <p class="u-text-center" style="background-color:green">Section</p>
+    </div>
+</div>
+<h5>2. section--no-bottom </h5>
+<p>Removes the bottom padding.</p>
+<div style="background-color:#0F984F">
+    <div class="section section--no-bottom">
+        <p class="u-text-center" style="background-color:green">Section</p>
+    </div>
+</div>
+<h5>3. section--stacked</h5>
+<p>If there is multiple sections stacked on top of each other it removes the top padding.</p>
+
+<div class="section section--stacked ]&apos; style=" background-color:#0f984f"="">
+    <p class="u-text-center" style="background-color:green">Section</p>
+</div>
+<div class="section section--stacked ]&apos; style=" background-color:#0f984f"="">
+    <p class="u-text-center" style="background-color:green">Section</p>
+</div>
+<h5>4. section-overlap--top </h5>
+<p>Removes the bottom padding.</p>
+<div style="background-color:#0F984F">
+    <div class="section">
+        <p class="u-text-center" style="background-color:green">Section</p>
+    </div>
+</div>
+<div style="background-color:orange; opacity:0.7">
+    <div class="section section-overlap--top">
+        <p class="u-text-center" style="background-color:green">Section</p>
+    </div>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#0F984F"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"section"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-center"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:green"</span>&gt;</span>Section<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>1. section--no-top<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Removes the top padding.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#0F984F"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"section section--no-top"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-center"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:green"</span>&gt;</span>Section<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>2. section--no-bottom <span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Removes the bottom padding.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#0F984F"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"section section--no-bottom"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-center"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:green"</span>&gt;</span>Section<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>3. section--stacked<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>If there is multiple sections stacked on top of each other it removes the top padding.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"section section--stacked ]&amp;apos; style="</span> <span class="hljs-attribute">background-color:</span>#<span class="hljs-attribute">0f984f</span>"=<span class="hljs-value">""</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-center"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:green"</span>&gt;</span>Section<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"section section--stacked ]&amp;apos; style="</span> <span class="hljs-attribute">background-color:</span>#<span class="hljs-attribute">0f984f</span>"=<span class="hljs-value">""</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-center"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:green"</span>&gt;</span>Section<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>4. section-overlap--top <span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Removes the bottom padding.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#0F984F"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"section"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-center"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:green"</span>&gt;</span>Section<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:orange; opacity:0.7"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"section section-overlap--top"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-center"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:green"</span>&gt;</span>Section<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Page_wrappers" data-section="Components" data-heading="Page wrappers">
+
+                            <div class="comment">
+                                <h2>Components/Page wrappers</h2>
+
+                                <p>Page wrappers control the width of the content they contain.</p>
+                            </div>
+
+                                <div class="result">
+                                    <div class="wrapper">
+    <div class="section gutters">
+        Wrapper
+    </div>
+</div>
+<div class="wrapper wrapper--wide">
+    <div class="section gutters">
+        Wide wrapper
+    </div>
+</div>
+<div class="wrapper wrapper--narrow">
+    <div class="section gutters">
+        Narrow wrapper
+    </div>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"wrapper"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"section gutters"</span>&gt;
+        Wrapper
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"wrapper wrapper--wide"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"section gutters"</span>&gt;
+        Wide wrapper
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"wrapper wrapper--narrow"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"section gutters"</span>&gt;
+        Narrow wrapper
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Pagination" data-section="Components" data-heading="Pagination">
+
+                            <div class="comment">
+                                <h2>Components/Pagination</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <ol class="pagination">
+    <li class="pagination__item  pagination__item--first">
+        <a href="#" class="pagination__link">First</a>
+    </li>
+    <li class="pagination__item  pagination__item--prev">
+        <a href="#" class="pagination__link">Previous</a>
+    </li>
+    <li class="pagination__item">
+        <a href="#" class="pagination__link">1</a>
+    </li>
+    <li class="pagination__item">
+        <a href="#" class="pagination__link is-current">2</a>
+    </li>
+    <li class="pagination__item">
+        <a href="#" class="pagination__link">3</a>
+    </li>
+    <li class="pagination__item">
+        <a href="#" class="pagination__link">4</a>
+    </li>
+    <li class="pagination__item">
+        <a href="#" class="pagination__link">5</a>
+    </li>
+    <li class="pagination__item  pagination__item--next">
+        <a href="#" class="pagination__link">Next</a>
+    </li>
+    <li class="pagination__item  pagination__item--last">
+        <a href="#" class="pagination__link">Last</a>
+    </li>
+</ol>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item  pagination__item--first"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link"</span>&gt;</span>First<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item  pagination__item--prev"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link"</span>&gt;</span>Previous<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link is-current"</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link"</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link"</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link"</span>&gt;</span>5<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item  pagination__item--next"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link"</span>&gt;</span>Next<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__item  pagination__item--last"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"#"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"pagination__link"</span>&gt;</span>Last<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Radio_picker" data-section="Components" data-heading="Radio picker">
+
+                            <div class="comment">
+                                <h2>Components/Radio picker</h2>
+
+                                <p>Turns a group of radio elements into big tappable regions, while still being
+accessible through keyboard navigation:</p>
+                            </div>
+
+                                <div class="result">
+                                    <div class="radio-picker">
+     <label>
+        <input class="radio-picker__input" type="radio" name="" checked>
+        <span class="radio-picker__body">
+             Rich context goes here!
+        </span>
+    </label>
+    <label>
+        <input class="radio-picker__input" type="radio" name="">
+        <span class="radio-picker__body">
+             Rich context goes here!
+        </span>
+    </label>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"radio-picker"</span>&gt;
+     &lt;label&gt;
+        &lt;input <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"radio-picker__input"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"radio"</span> name=<span class="hljs-string">""</span> checked&gt;
+        &lt;span <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"radio-picker__body"</span>&gt;
+             <span class="hljs-type">Rich</span> context goes here!
+        &lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"radio-picker__input"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"radio"</span> name=<span class="hljs-string">""</span>&gt;
+        &lt;span <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"radio-picker__body"</span>&gt;
+             <span class="hljs-type">Rich</span> context goes here!
+        &lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Responsive_tables" data-section="Components" data-heading="Responsive tables">
+
+                            <div class="comment">
+                                <h2>Components/Responsive tables</h2>
+
+                                <p>Responsive tables with more than two columns break to a different
+and easier to read format on small screens.</p>
+                            </div>
+
+                                <div class="result">
+                                    <table cellspacing="0" class="table table--responsive table--striped@medium">
+    <thead class="table__head">
+        <tr class="table__row">
+            <th class="table__header-cell">Transaction fee</th>
+            <th class="table__header-cell">Fast Forward Saver</th>
+            <th class="table__header-cell">Back-up Saver</th>
+            <th class="table__header-cell">First Saver</th>
+        </tr>
+    </thead>
+    <tbody class="table__body">
+        <tr class="table__row">
+            <td class="table__cell table__cell--title@small">Account Management Fee</td>
+            <td class="table__cell" data-header="Fast Forward Saver">Free</td>
+            <td class="table__cell" data-header="Back-up Saver">Free</td>
+            <td class="table__cell" data-header="First Saver">Free</td>
+        </tr>
+        <tr class="table__row">
+            <td class="table__cell table__cell--title@small">Deposits</td>
+            <td class="table__cell" data-header="Fast Forward Saver">Free</td>
+            <td class="table__cell" data-header="Back-up Saver">Free</td>
+            <td class="table__cell" data-header="First Saver">Free</td>
+        </tr>
+    </tbody>
+</table>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">cellspacing</span>=<span class="hljs-value">"0"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table table--responsive table--striped@medium"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">thead</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__head"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>Transaction fee<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>Fast Forward Saver<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>Back-up Saver<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>First Saver<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">thead</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__body"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell table__cell--title@small"</span>&gt;</span>Account Management Fee<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Fast Forward Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Back-up Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"First Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell table__cell--title@small"</span>&gt;</span>Deposits<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Fast Forward Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Back-up Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"First Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Scrollable_table" data-section="Components" data-heading="Scrollable table">
+
+                            <div class="comment">
+                                <h2>Components/Scrollable table</h2>
+
+                                <p>Make large complex tables horizontally scrollable on small screens
+Parent container must have utility class <code>u-scrollable-x</code> applied to control its overflow.</p>
+                            </div>
+
+                                <div class="result">
+                                    <div class="u-scrollable-x u-space">
+    <table cellspacing="0" class="table table--scrollable table--striped">
+        <thead class="table__head">
+            <tr class="table__row">
+                <th class="table__header-cell"></th>
+                <th class="table__header-cell">Fast Forward Saver</th>
+                <th class="table__header-cell">Back-up Saver</th>
+                <th class="table__header-cell">First Saver</th>
+                <th class="table__header-cell">Online Call<sup>+</sup></th>
+            </tr>
+        </thead>
+        <tbody class="table__body">
+            <tr class="table__row">
+                <td class="table__cell table__cell--title@small">Account Management Fee</td>
+                <td class="table__cell" data-header="Fast Forward Saver">Free</td>
+                <td class="table__cell" data-header="Back-up Saver">Free</td>
+                <td class="table__cell" data-header="First Saver">Free</td>
+                <td class="table__cell" data-header="Online Call">Free</td>
+            </tr>
+            <tr class="table__row">
+                <td class="table__cell table__cell--title@small">Deposits</td>
+                <td class="table__cell" data-header="Fast Forward Saver">Free</td>
+                <td class="table__cell" data-header="Back-up Saver">Free</td>
+                <td class="table__cell" data-header="First Saver">Free</td>
+                <td class="table__cell" data-header="Online Call">Free</td>
+            </tr>
+            <tr class="table__row">
+                <td class="table__cell table__cell--title@small">Transfers (for electronic transfers between your Kiwibank accounts)</td>
+                <td class="table__cell" data-header="Fast Forward Saver">Free</td>
+                <td class="table__cell" data-header="Back-up Saver">Free</td>
+                <td class="table__cell" data-header="First Saver">Free</td>
+                <td class="table__cell" data-header="Online Call">Free</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-scrollable-x u-space"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">cellspacing</span>=<span class="hljs-value">"0"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table table--scrollable table--striped"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">thead</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__head"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>Fast Forward Saver<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>Back-up Saver<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>First Saver<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>Online Call<span class="hljs-tag">&lt;<span class="hljs-title">sup</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-title">sup</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">thead</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__body"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell table__cell--title@small"</span>&gt;</span>Account Management Fee<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Fast Forward Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Back-up Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"First Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Online Call"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell table__cell--title@small"</span>&gt;</span>Deposits<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Fast Forward Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Back-up Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"First Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Online Call"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell table__cell--title@small"</span>&gt;</span>Transfers (for electronic transfers between your Kiwibank accounts)<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Fast Forward Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Back-up Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"First Saver"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Online Call"</span>&gt;</span>Free<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Stacked_tables" data-section="Components" data-heading="Stacked tables">
+
+                            <div class="comment">
+                                <h2>Components/Stacked tables</h2>
+
+                                <p>Rows and cells are full width and stack on top of each other at small sizes.
+We retain some header context by hiding the header and adding data attribute content to pseudo elements.</p>
+                            </div>
+
+                                <div class="result">
+                                    <table cellspacing="0" class="table table--stacked">
+    <thead class="table__head">
+        <tr class="table__row">
+            <th class="table__header-cell">Header title</th>
+            <th class="table__header-cell">As at 31 December 2015</th>
+            <th class="table__header-cell">As at Now</th>
+        </tr>
+    </thead>
+    <tbody class="table__body">
+        <tr class="table__row">
+            <td class="table__cell table__cell--title@small" data-header="Header title">Actual Solvency Capital (A)</td>
+            <td class="table__cell" data-header="As at 31 December 2015">14,069,000</td>
+            <td class="table__cell" data-header="As at Now">14,069,000</td>
+        </tr>
+        <tr class="table__row">
+            <td class="table__cell table__cell--title@small" data-header="Header title">Minimum Solvency Capital (B)</td>
+            <td class="table__cell" data-header="As at 31 December 2015">5,451,000</td>
+            <td class="table__cell" data-header="As at Now">5,451,000</td>
+        </tr>
+    </tbody>
+</table>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">cellspacing</span>=<span class="hljs-value">"0"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table table--stacked"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">thead</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__head"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>Header title<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>As at 31 December 2015<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__header-cell"</span>&gt;</span>As at Now<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">thead</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__body"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell table__cell--title@small"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Header title"</span>&gt;</span>Actual Solvency Capital (A)<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"As at 31 December 2015"</span>&gt;</span>14,069,000<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"As at Now"</span>&gt;</span>14,069,000<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell table__cell--title@small"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"Header title"</span>&gt;</span>Minimum Solvency Capital (B)<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"As at 31 December 2015"</span>&gt;</span>5,451,000<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span> <span class="hljs-attribute">data-header</span>=<span class="hljs-value">"As at Now"</span>&gt;</span>5,451,000<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Striped_tables" data-section="Components" data-heading="Striped tables">
+
+                            <div class="comment">
+                                <h2>Components/Striped tables</h2>
+
+                                <p>This component adds stripes to each odd row in the table body section.
+We don&apos;t want this as a base style on all tables otherwise we have to remove them from various breakpoints in various situations. Better to lock it down to a class of its own since the declaration to style the stripes is quite specific.</p>
+                            </div>
+
+                                <div class="result">
+                                    <table class="table table--striped">
+    <tbody class="table__body">
+        <tr class="table__row">
+            <td class="table__cell">Claire</td>
+            <td class="table__cell">Campbell</td>
+        </tr>
+        <tr class="table__row">
+            <td class="table__cell">Laura</td>
+            <td class="table__cell">Bunea</td>
+        </tr>
+        <tr class="table__row">
+            <td class="table__cell">Sam</td>
+            <td class="table__cell">Sanders</td>
+        </tr>
+        <tr class="table__row">
+            <td class="table__cell">Katie</td>
+            <td class="table__cell">Day</td>
+        </tr>
+    </tbody>
+</table>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table table--striped"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__body"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span>&gt;</span>Claire<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span>&gt;</span>Campbell<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span>&gt;</span>Laura<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span>&gt;</span>Bunea<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span>&gt;</span>Sam<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span>&gt;</span>Sanders<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__row"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span>&gt;</span>Katie<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table__cell"</span>&gt;</span>Day<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Components-Tables" data-section="Components" data-heading="Tables">
+
+                            <div class="comment">
+                                <h2>Components/Tables</h2>
+
+                                <p>Base styles to be shared across all table options
+We have 5 table options/modifiers. Usually there will be at least two
+options applied to a table since the table class alone is just basic styles.</p>
+<ul>
+<li>Eg. <code>class=&quot;table table--responsive table--striped@medium&quot;</code></li>
+<li><code>class=&quot;table table--stacked table--striped&quot;</code></li>
+</ul>
+<p>This may feel verbose, but it is the most flexible and efficient way to
+handle the use of many different table styles without having to override
+each other or use many different cell classes throughout the markup.</p>
+<p>Types of tables:</p>
+<ol>
+<li>Responsive tables with more than two columns that break to a different
+and easier to read format on small screens.</li>
+<li>Scrollabe tables, for tables with complex content that doesn&apos;t
+break down on small screens very easily. Relies on parent container
+to control the overflow</li>
+<li>Stacked tables, for when there isn&apos;t too many columns and they want it
+to behave a little more like a definition list. Uses data
+attributes to add table heading content to table cell pseudo elements
+so we don&apos;t lose table headings entirely.</li>
+<li>Striped tables, we don&apos;t want this as a base style on all tables
+otherwise we have to remove them from various breakpoints in various
+situations. Better to lock it down to a class of its own since the
+declaration to style the stripes is quite specific.</li>
+<li>Product tables. These are specifically used for products to list a
+group of fees. It is only two columns without any heading data
+so much more simplistic.</li>
+</ol>
+                            </div>
+
+
+                            <!--the html code-->
+
+                        </div>
+                        <div class="styleguide-section" id="Elements-Focus_states" data-section="Elements" data-heading="Focus states">
+
+                            <div class="comment">
+                                <h2>Elements/Focus states</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <p>
+    You can change the selection colour, select this paragraph to see what colour it is.
+</p>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;p&gt;
+    You can change <span class="hljs-keyword">the</span> selection colour, select this <span class="hljs-property">paragraph</span> <span class="hljs-keyword">to</span> see what colour <span class="hljs-keyword">it</span> <span class="hljs-keyword">is</span>.
+&lt;/p&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Elements-Headings" data-section="Elements" data-heading="Headings">
+
+                            <div class="comment">
+                                <h2>Elements/Headings</h2>
+
+                                <p>Simple default styles for headings 1 through 6.</p>
+                            </div>
+
+                                <div class="result">
+                                    <h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Heading 1<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Heading 2<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Heading 3<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h4</span>&gt;</span>Heading 4<span class="hljs-tag">&lt;/<span class="hljs-title">h4</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>Heading 5<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">h6</span>&gt;</span>Heading 6<span class="hljs-tag">&lt;/<span class="hljs-title">h6</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Elements-Lists" data-section="Elements" data-heading="Lists">
+
+                            <div class="comment">
+                                <h2>Elements/Lists</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <ul>
+    <li>List item one</li>
+    <li>List item two</li>
+</ul>
+
+<ol>
+    <li>List item one</li>
+    <li>List item two</li>
+</ol>
+
+<dl>
+    <dt>Coffee</dt>
+    <dd>Black hot drink</dd>
+    <dt>Milk</dt>
+    <dd>White cold drink</dd>
+</dl>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>List item one<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>List item two<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">ol</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>List item one<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>List item two<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ol</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">dl</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">dt</span>&gt;</span>Coffee<span class="hljs-tag">&lt;/<span class="hljs-title">dt</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">dd</span>&gt;</span>Black hot drink<span class="hljs-tag">&lt;/<span class="hljs-title">dd</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">dt</span>&gt;</span>Milk<span class="hljs-tag">&lt;/<span class="hljs-title">dt</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">dd</span>&gt;</span>White cold drink<span class="hljs-tag">&lt;/<span class="hljs-title">dd</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">dl</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Elements-Quotes" data-section="Elements" data-heading="Quotes">
+
+                            <div class="comment">
+                                <h2>Elements/Quotes</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <q>Talk is cheap. Show me the code.</q>
+
+<blockquote>
+  <p>
+   They don&apos;t make bugs like Bunny anymore.
+  </p>
+</blockquote>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">q</span>&gt;</span>Talk is cheap. Show me the code.<span class="hljs-tag">&lt;/<span class="hljs-title">q</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">blockquote</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
+   They don&amp;apos;t make bugs like Bunny anymore.
+  <span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">blockquote</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Elements-Tables" data-section="Elements" data-heading="Tables">
+
+                            <div class="comment">
+                                <h2>Elements/Tables</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <table>
+    <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+        </tr>
+    
+</tbody></table>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">table</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">thead</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span>&gt;</span>Firstname<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">th</span>&gt;</span>Lastname<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">thead</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span>Jill<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span>Smith<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+    
+<span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Objects-Inline_list" data-section="Objects" data-heading="Inline list">
+
+                            <div class="comment">
+                                <h2>Objects/Inline list</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <ul class="list-inline">
+    <li class="list-inline__item">List item one</li>
+    <li class="list-inline__item">List item two</li>
+</ul>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"list-inline"</span>&gt;
+    &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"list-inline__item"</span>&gt;<span class="hljs-keyword">List</span> item <span class="hljs-keyword">one</span>&lt;/<span class="hljs-keyword">li</span>&gt;
+    &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"list-inline__item"</span>&gt;<span class="hljs-keyword">List</span> item <span class="hljs-keyword">two</span>&lt;/<span class="hljs-keyword">li</span>&gt;
+&lt;/ul&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Objects-Media_blocks" data-section="Objects" data-heading="Media blocks">
+
+                            <div class="comment">
+                                <h2>Objects/Media blocks</h2>
+
+                                <p>Float an image to the left, with a clearfixed block of content to the right.</p>
+                            </div>
+
+                                <div class="result">
+                                    <div class="media">
+    <img class="media__image" src="https://placekitten.com/200/150" alt="">
+    <div class="media__body">
+        <p>The text</p>
+     </div>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"media"</span>&gt;
+    &lt;img <span class="hljs-type">class</span>=<span class="hljs-string">"media__image"</span> src=<span class="hljs-string">"https://placekitten.com/200/150"</span> alt=<span class="hljs-string">""</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"media__body"</span>&gt;
+        &lt;p&gt;The <span class="hljs-type">text</span>&lt;/p&gt;
+     &lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Objects-Unstyled_list" data-section="Objects" data-heading="Unstyled list">
+
+                            <div class="comment">
+                                <h2>Objects/Unstyled list</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <ul class="list-unstyled">
+    <li>List item one</li>
+    <li>List item two</li>
+</ul>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"list-unstyled"</span>&gt;
+    &lt;<span class="hljs-keyword">li</span>&gt;<span class="hljs-keyword">List</span> item <span class="hljs-keyword">one</span>&lt;/<span class="hljs-keyword">li</span>&gt;
+    &lt;<span class="hljs-keyword">li</span>&gt;<span class="hljs-keyword">List</span> item <span class="hljs-keyword">two</span>&lt;/<span class="hljs-keyword">li</span>&gt;
+&lt;/ul&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Theming-Themes" data-section="Theming" data-heading="Themes">
+
+                            <div class="comment">
+                                <h2>Theming/Themes</h2>
+
+                                <p>The default theme goes first. Following themes will override the default.</p>
+                            </div>
+
+                                <div class="result">
+                                    <div class="grid grid--row-spacing grid--col-spacing">
+    <div class="t-pink width-1/4@large width-1/2@medium">
+        <div class="u-current-bg-color">
+            <p>pink</p>
+        </div>
+        <div>
+            <p class="u-current-color">pink</p>
+        </div>
+    </div>
+    <div class="t-green width-1/4@large width-1/2@medium">
+        <div class="u-current-bg-color">
+            <p>green</p>
+        </div>
+        <div>
+            <p class="u-current-color">green</p>
+        </div>
+    </div>
+    <div class="t-blue width-1/4@large width-1/2@medium">
+        <div class="u-current-bg-color">
+            <p>blue</p>
+        </div>
+        <div>
+            <p class="u-current-color">blue</p>
+        </div>
+    </div>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"grid grid--row-spacing grid--col-spacing"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"t-pink width-1/4@large width-1/2@medium"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-current-bg-color"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>pink<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-current-color"</span>&gt;</span>pink<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"t-green width-1/4@large width-1/2@medium"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-current-bg-color"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>green<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-current-color"</span>&gt;</span>green<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"t-blue width-1/4@large width-1/2@medium"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-current-bg-color"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>blue<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-current-color"</span>&gt;</span>blue<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Tools-Breakpoints" data-section="Tools" data-heading="Breakpoints">
+
+                            <div class="comment">
+                                <h2>Tools/Breakpoints</h2>
+
+                                <p>Breakpoints and media query mixins.</p>
+<p>To use a breakpoint all you need to do is call them like a mixin with <code>@include</code>.
+Resize the browser to see how our default breakpoints work.</p>
+                            </div>
+
+                                <div class="result">
+                                    <div class="grid">
+    <div class="width-1/3">
+        <p class="breakpoint-on-xsmall">xsmall</p>
+    </div>
+    <div class="width-1/3">
+        <p class="breakpoint-on-smallish">Smallish</p>
+    </div>
+    <div class="width-1/3">
+        <p class="breakpoint-on-small">Small</p>
+    </div>
+
+    <div class="width-1/3">
+        <p class="breakpoint-on-medium">Medium</p>
+    </div>
+    <div class="width-1/3">
+        <p class="breakpoint-on-large">Large</p>
+    </div>
+    <div class="width-1/3">
+        <p class="breakpoint-on-xlarge">xlarge</p>
+    </div>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"grid"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"width-1/3"</span>&gt;
+        &lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"breakpoint-on-xsmall"</span>&gt;xsmall&lt;/p&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"width-1/3"</span>&gt;
+        &lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"breakpoint-on-smallish"</span>&gt;Smallish&lt;/p&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"width-1/3"</span>&gt;
+        &lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"breakpoint-on-small"</span>&gt;Small&lt;/p&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"width-1/3"</span>&gt;
+        &lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"breakpoint-on-medium"</span>&gt;Medium&lt;/p&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"width-1/3"</span>&gt;
+        &lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"breakpoint-on-large"</span>&gt;Large&lt;/p&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"width-1/3"</span>&gt;
+        &lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"breakpoint-on-xlarge"</span>&gt;xlarge&lt;/p&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Utilities-Align" data-section="Utilities" data-heading="Align">
+
+                            <div class="comment">
+                                <h2>Utilities/Align</h2>
+
+                                <p>Here are some utility classes to help modify the vertical alignment, text alignment, margins and floats.</p>
+                            </div>
+
+                                <div class="result">
+                                    <h5>Vertical align</h5>
+<div class="u-align-middle">
+    <img src="https://placekitten.com/200/150" alt="">
+    <img src="https://placekitten.com/200/150" alt="">
+</div>
+<div>
+  <img src="https://placekitten.com/200/150">
+  <img src="https://placekitten.com/200/150" class="u-align-bottom">
+</div>
+<br>
+
+<h5>Text align</h5>
+
+<p class="u-text-left" style="background-color:#eee">Left Text</p>
+<p class="u-text-right" style="background-color:#eee">Right Text</p>
+<p class="u-text-center" style="background-color:#eee">Centered Text</p>
+<br>
+
+<h5>Margin center</h5>
+<div class="u-auto">
+  <img src="https://placekitten.com/200/150" alt="">
+</div>
+<div class="u-margin-center">
+  <img src="https://placekitten.com/200/150" alt="">
+</div>
+
+<h5>Floats</h5>
+<div class="u-clear">
+    <img class="u-left" src="https://placekitten.com/200/150" alt="">
+    <img class="u-right" src="https://placekitten.com/200/150" alt="">
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>Vertical align<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-align-middle"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://placekitten.com/200/150"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">""</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://placekitten.com/200/150"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">""</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://placekitten.com/200/150"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://placekitten.com/200/150"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-align-bottom"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>Text align<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-left"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#eee"</span>&gt;</span>Left Text<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-right"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#eee"</span>&gt;</span>Right Text<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-text-center"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#eee"</span>&gt;</span>Centered Text<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>Margin center<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-auto"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://placekitten.com/200/150"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">""</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-margin-center"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://placekitten.com/200/150"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">""</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">h5</span>&gt;</span>Floats<span class="hljs-tag">&lt;/<span class="hljs-title">h5</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-clear"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-left"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://placekitten.com/200/150"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">""</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-right"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://placekitten.com/200/150"</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">""</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Utilities-Margins" data-section="Utilities" data-heading="Margins">
+
+                            <div class="comment">
+                                <h2>Utilities/Margins</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <div style="background-color:#0F9850">
+    <p style="background-color:#efefef" class="u-mb--">mb--</p>
+    <p style="background-color:#efefef" class="u-mb-">mb-</p>
+    <p style="background-color:#efefef" class="u-mb">mb</p>
+    <p style="background-color:#efefef" class="u-mb+">mb+</p>
+    <p style="background-color:#efefef" class="u-mb++">mb++</p>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#0F9850"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#efefef"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-mb--"</span>&gt;</span>mb--<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#efefef"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-mb-"</span>&gt;</span>mb-<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#efefef"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-mb"</span>&gt;</span>mb<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#efefef"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-mb+"</span>&gt;</span>mb+<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-color:#efefef"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"u-mb++"</span>&gt;</span>mb++<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Utilities-Text" data-section="Utilities" data-heading="Text">
+
+                            <div class="comment">
+                                <h2>Utilities/Text</h2>
+
+                                
+                            </div>
+
+                                <div class="result">
+                                    <p class="u-text-bold">Bold text</p>
+<p class="u-text-uppercase">Uppercase text</p>
+<p class="u-text-underline">Underlined text</p>
+<p>base paragraph size</p>
+<p class="u-font-size++">large paragraph size</p>
+<p class="u-font-size--">small paragraph size</p>
+<p class="u-big">Big paragraph size</p>
+<p class="u-text-truncate">Here is a large line of text to show that this text is truncated truncated truncated truncated truncated truncated truncated.</p>
+<p class="u-hyphen">Here is a large line of text to show that this text is hyphenated hyphenated hyphenated hyphenated hyphenated hyphenated hyphenated.</p>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-text-bold"</span>&gt;Bold <span class="hljs-type">text</span>&lt;/p&gt;
+&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-text-uppercase"</span>&gt;Uppercase <span class="hljs-type">text</span>&lt;/p&gt;
+&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-text-underline"</span>&gt;Underlined <span class="hljs-type">text</span>&lt;/p&gt;
+&lt;p&gt;base <span class="hljs-property">paragraph</span> size&lt;/p&gt;
+&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-font-size++"</span>&gt;large <span class="hljs-property">paragraph</span> size&lt;/p&gt;
+&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-font-size--"</span>&gt;small <span class="hljs-property">paragraph</span> size&lt;/p&gt;
+&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-big"</span>&gt;Big <span class="hljs-property">paragraph</span> size&lt;/p&gt;
+&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-text-truncate"</span>&gt;Here <span class="hljs-keyword">is</span> a large line <span class="hljs-keyword">of</span> <span class="hljs-type">text</span> <span class="hljs-keyword">to</span> show <span class="hljs-keyword">that</span> this <span class="hljs-type">text</span> <span class="hljs-keyword">is</span> truncated truncated truncated truncated truncated truncated truncated.&lt;/p&gt;
+&lt;p <span class="hljs-type">class</span>=<span class="hljs-string">"u-hyphen"</span>&gt;Here <span class="hljs-keyword">is</span> a large line <span class="hljs-keyword">of</span> <span class="hljs-type">text</span> <span class="hljs-keyword">to</span> show <span class="hljs-keyword">that</span> this <span class="hljs-type">text</span> <span class="hljs-keyword">is</span> hyphenated hyphenated hyphenated hyphenated hyphenated hyphenated hyphenated.&lt;/p&gt;
+</pre>
+                                </div>
+
+                        </div>
+                        <div class="styleguide-section" id="Utilities-Widths" data-section="Utilities" data-heading="Widths">
+
+                            <div class="comment">
+                                <h2>Utilities/Widths</h2>
+
+                                <p>Helper classes you can use to size grid systems.
+For responsive widths, add one of the breakpoint specifiers at the end of the class name:</p>
+<ul>
+<li><code>@small</code></li>
+<li><code>@medium</code></li>
+<li><code>@large</code></li>
+</ul>
+                            </div>
+
+                                <div class="result">
+                                    <div class="grid">
+    <div class="width-1/4">
+        <p style="border:1px solid green;">width-1/4</p>
+    </div>
+    <div class="width-1/4">
+        <p style="border:1px solid green;">width-1/4</p>
+    </div>
+    <div class="width-1/2">
+        <p style="border:1px solid green;">width-1/2</p>
+    </div>
+</div>
+<div class="grid">
+    <div class="width-1/3">
+        <p style="border:1px solid green;">width-1/3</p>
+    </div>
+    <div class="width-2/3">
+        <p style="border:1px solid green;">width-2/3</p>
+    </div>
+</div>
+<div class="grid">
+    <div class="width-1/10">
+        <p style="border:1px solid green;">width-1/10</p>
+    </div>
+    <div class="width-2/10">
+        <p style="border:1px solid green;">width-2/10</p>
+    </div>
+    <div class="width-3/10">
+        <p style="border:1px solid green;">width-3/10</p>
+    </div>
+    <div class="width-4/10">
+        <p style="border:1px solid green;">width-4/10</p>
+    </div>
+</div>
+                                </div>
+
+                            <!--the html code-->
+                                <div class="markup hljs">
+<pre>
+&lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"grid"</span>&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-1/4"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">1</span>/<span class="hljs-number">4</span>&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-1/4"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">1</span>/<span class="hljs-number">4</span>&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-1/2"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">1</span>/<span class="hljs-number">2</span>&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"grid"</span>&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-1/3"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">1</span>/<span class="hljs-number">3</span>&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-2/3"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">2</span>/<span class="hljs-number">3</span>&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"grid"</span>&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-1/10"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">1</span>/<span class="hljs-number">10</span>&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-2/10"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">2</span>/<span class="hljs-number">10</span>&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-3/10"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">3</span>/<span class="hljs-number">10</span>&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;<span class="hljs-tag">div</span> class=<span class="hljs-string">"width-4/10"</span>&gt;
+        &lt;<span class="hljs-tag">p</span> style=<span class="hljs-string">"border:1px solid green;"</span>&gt;<span class="hljs-attribute">width</span>-<span class="hljs-number">4</span>/<span class="hljs-number">10</span>&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                                </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                 <div class="width-full width-1/4@medium theme--fred">
+                    <div class="gutters section">
+                        <ul class="list-unstyled styleguide-menu">
+                                <li>
+                                        <a class="submenulink" href="#" data-section="Components">Components</a>
+                                        <ul class="submenu" data-submenu="Components">
+                                            <li><a href="#Components-Avatar">Avatar</a></li>
+                                            <li><a href="#Components-Basic_form_fields">Basic form fields</a></li>
+                                            <li><a href="#Components-Button_groups">Button groups</a></li>
+                                            <li><a href="#Components-Buttons">Buttons</a></li>
+                                            <li><a href="#Components-Modal_lightboxes">Modal lightboxes</a></li>
+                                            <li><a href="#Components-Page_gutters">Page gutters</a></li>
+                                            <li><a href="#Components-Page_header">Page header</a></li>
+                                            <li><a href="#Components-Page_sections">Page sections</a></li>
+                                            <li><a href="#Components-Page_wrappers">Page wrappers</a></li>
+                                            <li><a href="#Components-Pagination">Pagination</a></li>
+                                            <li><a href="#Components-Radio_picker">Radio picker</a></li>
+                                            <li><a href="#Components-Responsive_tables">Responsive tables</a></li>
+                                            <li><a href="#Components-Scrollable_table">Scrollable table</a></li>
+                                            <li><a href="#Components-Stacked_tables">Stacked tables</a></li>
+                                            <li><a href="#Components-Striped_tables">Striped tables</a></li>
+                                            <li><a href="#Components-Tables">Tables</a></li>
+                                        </ul>
+                                </li>
+                                <li>
+                                        <a class="submenulink" href="#" data-section="Elements">Elements</a>
+                                        <ul class="submenu" data-submenu="Elements">
+                                            <li><a href="#Elements-Focus_states">Focus states</a></li>
+                                            <li><a href="#Elements-Headings">Headings</a></li>
+                                            <li><a href="#Elements-Lists">Lists</a></li>
+                                            <li><a href="#Elements-Quotes">Quotes</a></li>
+                                            <li><a href="#Elements-Tables">Tables</a></li>
+                                        </ul>
+                                </li>
+                                <li>
+                                        <a class="submenulink" href="#" data-section="Objects">Objects</a>
+                                        <ul class="submenu" data-submenu="Objects">
+                                            <li><a href="#Objects-Inline_list">Inline list</a></li>
+                                            <li><a href="#Objects-Media_blocks">Media blocks</a></li>
+                                            <li><a href="#Objects-Unstyled_list">Unstyled list</a></li>
+                                        </ul>
+                                </li>
+                                <li>
+                                        <a class="submenulink" href="#" data-section="Theming">Theming</a>
+                                        <ul class="submenu" data-submenu="Theming">
+                                            <li><a href="#Theming-Themes">Themes</a></li>
+                                        </ul>
+                                </li>
+                                <li>
+                                        <a class="submenulink" href="#" data-section="Tools">Tools</a>
+                                        <ul class="submenu" data-submenu="Tools">
+                                            <li><a href="#Tools-Breakpoints">Breakpoints</a></li>
+                                        </ul>
+                                </li>
+                                <li>
+                                        <a class="submenulink" href="#" data-section="Utilities">Utilities</a>
+                                        <ul class="submenu" data-submenu="Utilities">
+                                            <li><a href="#Utilities-Align">Align</a></li>
+                                            <li><a href="#Utilities-Margins">Margins</a></li>
+                                            <li><a href="#Utilities-Text">Text</a></li>
+                                            <li><a href="#Utilities-Widths">Widths</a></li>
+                                        </ul>
+                                </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--footer-->
+
+    <div  id="footer" role="contentinfo">
+        <div class="wrapper">
+            <div class="gutters section">
+                <div class="grid">
+                    <p class="u-text-right">
+                        Made with love by FRED <span style="color:#7DC265">&#10084;</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+    /*
+    
+    github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+    
+    */
+    
+    #styleguide .hljs pre, .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+      -webkit-text-size-adjust: none;
+    }
+    
+    .hljs-comment,
+    .diff .hljs-header {
+      color: #998;
+      font-style: italic;
+    }
+    
+    .hljs-keyword,
+    .css .rule .hljs-keyword,
+    .hljs-winutils,
+    .nginx .hljs-title,
+    .hljs-subst,
+    .hljs-request,
+    .hljs-status {
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .hljs-number,
+    .hljs-hexcolor,
+    .ruby .hljs-constant {
+      color: #008080;
+    }
+    
+    .hljs-string,
+    .hljs-tag .hljs-value,
+    .hljs-doctag,
+    .tex .hljs-formula {
+      color: #d14;
+    }
+    
+    .hljs-title,
+    .hljs-id,
+    .scss .hljs-preprocessor {
+      color: #900;
+      font-weight: bold;
+    }
+    
+    .hljs-list .hljs-keyword,
+    .hljs-subst {
+      font-weight: normal;
+    }
+    
+    .hljs-class .hljs-title,
+    .hljs-type,
+    .vhdl .hljs-literal,
+    .tex .hljs-command {
+      color: #458;
+      font-weight: bold;
+    }
+    
+    .hljs-tag,
+    .hljs-tag .hljs-title,
+    .hljs-rule .hljs-property,
+    .django .hljs-tag .hljs-keyword {
+      color: #000080;
+      font-weight: normal;
+    }
+    
+    .hljs-attribute,
+    .hljs-variable,
+    .lisp .hljs-body,
+    .hljs-name {
+      color: #008080;
+    }
+    
+    .hljs-regexp {
+      color: #009926;
+    }
+    
+    .hljs-symbol,
+    .ruby .hljs-symbol .hljs-string,
+    .lisp .hljs-keyword,
+    .clojure .hljs-keyword,
+    .scheme .hljs-keyword,
+    .tex .hljs-special,
+    .hljs-prompt {
+      color: #990073;
+    }
+    
+    .hljs-built_in {
+      color: #0086b3;
+    }
+    
+    .hljs-preprocessor,
+    .hljs-pragma,
+    .hljs-pi,
+    .hljs-doctype,
+    .hljs-shebang,
+    .hljs-cdata {
+      color: #999;
+      font-weight: bold;
+    }
+    
+    .hljs-deletion {
+      background: #fdd;
+    }
+    
+    .hljs-addition {
+      background: #dfd;
+    }
+    
+    .diff .hljs-change {
+      background: #0086b3;
+    }
+    
+    .hljs-chunk {
+      color: #aaa;
+    }
+    
+    </style>
+    <script>
+        window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+        ga('create','UA-79835767-5','auto');
+        ga('send','pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+</body>
+</html>
